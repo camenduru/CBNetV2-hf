@@ -186,15 +186,18 @@ This is an unofficial demo for [https://github.com/VDIGPKU/CBNetV2](https://gith
                     detect_button = gr.Button(value='Detect')
                     detection_results = gr.Variable()
             with gr.Column():
-                detection_visualization = gr.Image(label='Detection Result',
-                                                   type='numpy')
-                visualization_score_threshold = gr.Slider(
-                    0,
-                    1,
-                    step=0.05,
-                    value=0.3,
-                    label='Visualization Score Threshold')
-                redraw_button = gr.Button(value='Redraw')
+                with gr.Row():
+                    detection_visualization = gr.Image(
+                        label='Detection Result', type='numpy')
+                with gr.Row():
+                    visualization_score_threshold = gr.Slider(
+                        0,
+                        1,
+                        step=0.05,
+                        value=0.3,
+                        label='Visualization Score Threshold')
+                with gr.Row():
+                    redraw_button = gr.Button(value='Redraw')
 
         with gr.Row():
             paths = sorted(pathlib.Path('images').rglob('*.jpg'))
