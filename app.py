@@ -14,12 +14,12 @@ if os.getenv('SYSTEM') == 'spaces':
     mim.uninstall('mmcv-full', confirm_yes=True)
     mim.install('mmcv-full==1.5.0', is_yes=True)
 
-    subprocess.call('pip uninstall -y opencv-python'.split())
-    subprocess.call('pip uninstall -y opencv-python-headless'.split())
-    subprocess.call('pip install opencv-python-headless==4.5.5.64'.split())
+    subprocess.run('pip uninstall -y opencv-python'.split())
+    subprocess.run('pip uninstall -y opencv-python-headless'.split())
+    subprocess.run('pip install opencv-python-headless==4.5.5.64'.split())
 
-    subprocess.call('git apply ../patch'.split(), cwd='CBNetV2')
-    subprocess.call('mv palette.py CBNetV2/mmdet/core/visualization/'.split())
+    subprocess.run('git apply ../patch'.split(), cwd='CBNetV2')
+    subprocess.run('mv palette.py CBNetV2/mmdet/core/visualization/'.split())
 
 import gradio as gr
 import numpy as np
