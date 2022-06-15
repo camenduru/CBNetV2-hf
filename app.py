@@ -163,13 +163,7 @@ def main():
     args = parse_args()
     model = Model(args.device)
 
-    css = '''
-h1#title {
-  text-align: center;
-}
-'''
-
-    with gr.Blocks(theme=args.theme, css=css) as demo:
+    with gr.Blocks(theme=args.theme, css='style.css') as demo:
         gr.Markdown('''<h1 id="title">VDIGPKU/CBNetV2</h1>
 
 This is an unofficial demo for [https://github.com/VDIGPKU/CBNetV2](https://github.com/VDIGPKU/CBNetV2).'''
