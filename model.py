@@ -23,7 +23,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-sys.path.insert(0, 'CBNetV2/')
+app_dir = pathlib.Path(__file__).parent
+submodule_dir = app_dir / 'CBNetV2/'
+sys.path.insert(0, submodule_dir.as_posix())
 
 from mmdet.apis import inference_detector, init_detector
 
