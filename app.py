@@ -18,7 +18,8 @@ if os.getenv('SYSTEM') == 'spaces':
     subprocess.run('pip uninstall -y opencv-python-headless'.split())
     subprocess.run('pip install opencv-python-headless==4.5.5.64'.split())
 
-    subprocess.run('git apply ../patch'.split(), cwd='CBNetV2')
+    with open('patch') as f:
+        subprocess.run('patch -p1'.split(), cwd='CBNetV2', stdin=f)
     subprocess.run('mv palette.py CBNetV2/mmdet/core/visualization/'.split())
 
 import gradio as gr
