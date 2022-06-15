@@ -31,6 +31,11 @@ sys.path.insert(0, 'CBNetV2/')
 
 from mmdet.apis import inference_detector, init_detector
 
+DESCRIPTION = '''# CBNetV2
+
+This is an unofficial demo for [https://github.com/VDIGPKU/CBNetV2](https://github.com/VDIGPKU/CBNetV2).'''
+FOOTER = '<img id="visitor-badge" alt="visitor badge" src="https://visitor-badge.glitch.me/badge?page_id=hysts.cbnetv2" />'
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -164,10 +169,7 @@ def main():
     model = Model(args.device)
 
     with gr.Blocks(theme=args.theme, css='style.css') as demo:
-        gr.Markdown('''<h1 id="title">VDIGPKU/CBNetV2</h1>
-
-This is an unofficial demo for [https://github.com/VDIGPKU/CBNetV2](https://github.com/VDIGPKU/CBNetV2).'''
-                    )
+        gr.Markdown(DESCRIPTION)
 
         with gr.Row():
             with gr.Column():
@@ -200,9 +202,7 @@ This is an unofficial demo for [https://github.com/VDIGPKU/CBNetV2](https://gith
                                         samples=[[path.as_posix()]
                                                  for path in paths])
 
-        gr.Markdown(
-            '<center><img src="https://visitor-badge.glitch.me/badge?page_id=hysts.cbnetv2" alt="visitor badge"/></center>'
-        )
+        gr.Markdown(FOOTER)
 
         detector_name.change(fn=model.set_model_name,
                              inputs=[detector_name],
