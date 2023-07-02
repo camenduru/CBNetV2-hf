@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
+import shlex
 import subprocess
 import sys
 
@@ -11,12 +12,12 @@ if os.getenv('SYSTEM') == 'spaces':
     mim.uninstall('mmcv-full', confirm_yes=True)
     mim.install('mmcv-full==1.5.0', is_yes=True)
 
-    subprocess.run('pip uninstall -y opencv-python'.split())
-    subprocess.run('pip uninstall -y opencv-python-headless'.split())
-    subprocess.run('pip install opencv-python-headless==4.5.5.64'.split())
+    subprocess.run(shlex.split('pip uninstall -y opencv-python'))
+    subprocess.run(shlex.split('pip uninstall -y opencv-python-headless'))
+    subprocess.run(shlex.split('pip install opencv-python-headless==4.8.0.74'))
 
     with open('patch') as f:
-        subprocess.run('patch -p1'.split(), cwd='CBNetV2', stdin=f)
+        subprocess.run(shlex.split('patch -p1'), cwd='CBNetV2', stdin=f)
     subprocess.run('mv palette.py CBNetV2/mmdet/core/visualization/'.split())
 
 import numpy as np
@@ -31,8 +32,9 @@ from mmdet.apis import inference_detector, init_detector
 
 
 class Model:
-    def __init__(self, device: str | torch.device):
-        self.device = torch.device(device)
+    def __init__(self):
+        self.device = torch.device(
+            'cuda:0' if torch.cuda.is_available() else 'cpu')
         self.models = self._load_models()
         self.model_name = 'Improved HTC (DB-Swin-B)'
 
